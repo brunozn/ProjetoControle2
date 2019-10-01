@@ -22,7 +22,7 @@ function varargout = guide(varargin)
 
 % Edit the above text to modify the response to help guide
 
-% Last Modified by GUIDE v2.5 30-Sep-2019 11:21:23
+% Last Modified by GUIDE v2.5 30-Sep-2019 20:12:27
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -122,16 +122,28 @@ end
 % --- Executes on button press in butaocalc.
 function butaocalc_Callback(hObject, eventdata, handles)
 text = get(handles.N, 'String');
-convertString_int = str2num(text);
-raizes_numerador = roots(convertString_int);
-set(handles.E, 'String', raizes_numerador);
-plot(raizes_numerador,'O')
-hold on
+% convertString_int = str2num(text);
+% raizes_numerador = roots(convertString_int);
+% raizes_n = raizes_numerador'
+%  set(handles.E, 'String', raizes_n);
+% % %plot(raizes_numerador,'O')
+% hold on
 text1 = get(handles.D, 'String');
-conversor = str2num(text1)
-raizes_denominador = roots(conversor);
-set(handles.E2, 'String', raizes_denominador);
-plot(raizes_denominador,'X')
+% conversor = str2num(text1)
+% raizes_denominador = roots(conversor)
+%  raizes_d = raizes_denominador'
+%  set(handles.E2, 'String', raizes_d);
+% % plot(raizes_d,'X')
+
+H = tf([str2num(text)],[str2num(text1)])
+%pzmap(H)
+%grid on
+funcao = iopzplot(H, 'red')
+title('Polos e zeros da Função Transferencia')
+xlabel('Real')
+ylabel('Imaginario')
+
+
 
 % --- Executes on button press in botaoresetar.
 function botaoresetar_Callback(hObject, eventdata, handles)
