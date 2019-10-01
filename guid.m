@@ -138,12 +138,48 @@ text1 = get(handles.D, 'String');
 H = tf([str2num(text)],[str2num(text1)])
 %pzmap(H)
 %grid on
-funcao = iopzplot(H, 'red')
-title('Polos e zeros da Função Transferencia')
-xlabel('Real')
-ylabel('Imaginario')
+%funcao = iopzplot(H, 'red')
+%title('Polos e zeros da Função Transferencia')
+%xlabel('Real')
+%ylabel('Imaginario')
 
+ nume= str2num(text);
+ %nume = nume';
+ demo = str2num(text1);
+ %demo = demo';
+ z = [nume]
+ p = [demo]
+ for k=0:1:10
+    k
+    gg= tf(k*nume,demo);
+    hh=1;
+    mFechada = feedback(gg,hh);
+    [num, den] = tfdata (mFechada, 'v');
+    num = 1;
+    FT = tf(num,den);
+    raiz = roots(den)
+    hold on
+    funcao = iopzplot(FT, 'red')
+    title('Variação de K')
+    xlabel('Real')
+    ylabel('Imaginario')
 
+ end
+%      mFechada = feedback(gg,hh)
+
+%     k
+%      %syms s
+%     %poli = s^2 + (2+k)*s +k ==0
+%       %raiz=roots(poli)
+%       %plot(raiz, 'X')
+%      [num,den]=zp2tf(z,p,k)
+%      gg= tf(num,den);
+%      hh=1;
+%      
+%  end
+
+  
+ 
 
 % --- Executes on button press in botaoresetar.
 function botaoresetar_Callback(hObject, eventdata, handles)
